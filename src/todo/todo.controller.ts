@@ -1,5 +1,6 @@
-import { Controller, Get } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Model } from './model';
+import { v4 as uuid} from 'uuid';
 
 @Controller('todo')
 export class TodoController {
@@ -13,5 +14,12 @@ export class TodoController {
     getTodoList(): Model[] {
         return this.todoList;
     }
+
+    @Post()
+    createTodo(@Body() body): Model {
+        const todo=new Model(uuid(), body.title, body.description);
+        this.todoList.push(todo);
+        return todo;
+    } 
 
 }
