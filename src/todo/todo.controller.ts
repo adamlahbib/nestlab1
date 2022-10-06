@@ -1,7 +1,7 @@
 import { Body, Param, Controller, Get, Post, Delete, Put } from '@nestjs/common';
 import { Model } from './model';
 import { v4 as uuid} from 'uuid';
-
+import { TodoDTO } from './todo.dto';
 @Controller('todo')
 export class TodoController {
     constructor(){
@@ -16,7 +16,7 @@ export class TodoController {
     }
 
     @Post()
-    createTodo(@Body() body): Model {
+    createTodo(@Body() body: TodoDTO): Model {
         const todo=new Model(uuid(), body.title, body.description);
         this.todoList.push(todo);
         return todo;
@@ -36,7 +36,7 @@ export class TodoController {
     }
 
     @Put(':id')
-    updateTodo(@Param('id') id: string, @Body() body): Model{
+    updateTodo(@Param('id') id: string, @Body() body: TodoDTO): Model{
         const i=this.todoList.findIndex((todo) => todo.id === id);
         this.todoList[i].name=body.title?body.title:this.todoList[i].name;
         this.todoList[i].description=body.description?body.description:this.todoList[i].description;
