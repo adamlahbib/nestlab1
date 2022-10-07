@@ -3,7 +3,9 @@ import { GenerateIDService } from './common.service';
 
 @Global()
 @Module({
-    providers: [GenerateIDService],
-    exports: [GenerateIDService]
+    providers: [{
+        useValue: GenerateIDService.generate(),
+        provide: 'uuid'
+    }],
 })
 export class CommonModule {}
