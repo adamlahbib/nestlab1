@@ -1,9 +1,15 @@
 git clone git@github.com:adamlahbib/nestlab1.git
+
 cd nestlab1
+
 npm i
+
 git log
+
 git checkout <sha>
+
 npm run start:dev
+
 
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
