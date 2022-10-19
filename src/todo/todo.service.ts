@@ -1,19 +1,19 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Model } from './model';
 import { Status } from './status.enum';
 import { TodoAddDTO } from './todoadd.dto';
 import { TodoUpdateDTO } from './todoupdate.dto';
-import { GenerateIDService } from 'src/common/common.service';
 
 @Injectable()
-export class TodoService {    
-    constructor(private generateIDService: GenerateIDService){}
+export class TodoService { 
+    @Inject('UUID') uuid;   
+    constructor(){}
     
     todoList: Model[]=[];
 
     create(todo: TodoAddDTO){
         const _:Model={
-            id: this.generateIDService.generate(),
+            id: this.uuid,
             name: todo.title,
             description: todo.description,
             createdAt: new Date(),
